@@ -11,7 +11,7 @@ class Triplet
     end
 
     def length
-        Math.sqrt(** 2)
+        Math.sqrt(self ** 2)
     end
     
     def plus_equal(ins)
