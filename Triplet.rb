@@ -56,6 +56,26 @@ class Triplet
         }
     }
 
+    def self.dot(u, v)
+        u.x * v.x + u.y * v.y + u.z * u.z
+    end
+
+    def dot(v)
+        @x * v.x + @y * v.y + @z * v.z
+    end
+
+    def self.cross(u, v)
+        self.class.new(u.y * v.z - u.z * v.y,
+                       u.z * v.x - u.x * v.z,
+                       u.x * v.y - u.y * v.x)
+    end
+    
+    def cross(v)
+        self.class.new(@y * v.z - @z * v.y,
+                       @z * v.x - @x * v.z,
+                       @x * v.y - @y * v.x)
+    end
+
     # normal (and utilities) methods below
     def initialize(x = 0, y = nil, z = nil)
         @x, @y, @z = x, (y || x), (z || x)
