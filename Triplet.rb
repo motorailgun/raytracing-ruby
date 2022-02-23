@@ -33,9 +33,9 @@ class Triplet
     end
 
     def div_equal(num)
-        @x /= num
-        @y /= num
-        @z /= num
+        @x /= num.to_f
+        @y /= num.to_f
+        @z /= num.to_f
     end
 
     [:+, :-, '*', '/'].each{|sym|
