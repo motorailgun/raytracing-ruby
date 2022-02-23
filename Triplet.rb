@@ -54,24 +54,24 @@ class Triplet
 
     def /(operand)
         self.class.new(
-            @x.send(sym, operand),
-            @y.send(sym, operand),
-            @z.send(sym, operand) 
+            @x.send(:/, operand),
+            @y.send(:/, operand),
+            @z.send(:/, operand) 
         )
     end
 
     def *(operand)
         if [:x, :y, :z].all?{|attribute| operand.respond_to?(attribute) } then
             self.class.new(
-                @x.send(sym, operand.x),
-                @y.send(sym, operand.y),
-                @z.send(sym, operand.z) 
+                @x.send(:*, operand.x),
+                @y.send(:*, operand.y),
+                @z.send(:*, operand.z) 
             )
         else
             self.class.new(
-                @x.send(sym, operand),
-                @y.send(sym, operand),
-                @z.send(sym, operand) 
+                @x.send(:*, operand),
+                @y.send(:*, operand),
+                @z.send(:*, operand) 
             )
         end
     end
