@@ -6,7 +6,13 @@ class RGB < Triplet
         eval("alias #{ar[0]}= #{ar[1]}=")
     }
 
-    def initialize(init_value = 0)
+    def initialize(init_value = 0.0, color_level = 256)
+        @color_level = color_level
         super
+    end
+
+    undef_method(:join)
+    def to_s
+        [@x, @y, @z].map{ ((@color_level - 0.001) * _1).to_i }.reduce{|result, pt| result.to_s + ' ' + pt.to_s }
     end
 end
