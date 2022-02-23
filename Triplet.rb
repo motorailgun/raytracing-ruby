@@ -38,23 +38,21 @@ class Triplet
         @z /= num
     end
 
-    [:+, :-].each{|sym|
+    [:+, :-, '*', '/'].each{|sym|
         define_method(sym){|operand|
-            self.class.new(
-                @x.send(sym, operand.x),
-                @y.send(sym, operand.y),
-                @z.send(sym, operand.z) 
-            )
-        }
-    }
-
-    ['*', '/'].each{|sym|
-        define_method(sym){|operand|
-            self.class.new(
-                @x.send(sym, operand),
-                @y.send(sym, operand),
-                @z.send(sym, operand) 
-            )
+            if [:x, :y, :z].all?{|attribute| operand.respond_to?(attribute) } then
+                self.class.new(
+                    @x.send(sym, operand.x),
+                    @y.send(sym, operand.y),
+                    @z.send(sym, operand.z) 
+                )
+            else
+                self.class.new(
+                    @x.send(sym, operand),
+                    @y.send(sym, operand),
+                    @z.send(sym, operand) 
+                )
+            end
         }
     }
 
