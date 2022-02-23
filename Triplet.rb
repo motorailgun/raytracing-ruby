@@ -9,6 +9,10 @@ class Triplet
     def **(num)
         @x ** num + @y ** num + @z ** num
     end
+
+    def length
+        Math.sqrt(** 2)
+    end
     
     def plus_equal(ins)
         @x += ins.x
