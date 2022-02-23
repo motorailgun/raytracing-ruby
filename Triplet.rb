@@ -67,6 +67,10 @@ class Triplet
         [@x, @y, @z][idx]
     end
 
+    def set(x, y, z)
+        @x, @y, @z = x, y, z
+    end
+
     def join(str = "")
         [@x, @y, @z].reduce{|result, pt| result.to_s + str + pt.to_s }
     end
