@@ -6,7 +6,7 @@ class RGB < Triplet
         eval("alias #{ar[0]}= #{ar[1]}=")
     }
 
-    def initialize(init_value = 0.0, color_level = 256)
+    def initialize(x = 0.0, y = nil, z = nil, color_level = 256)
         @color_level = color_level
         super
     end

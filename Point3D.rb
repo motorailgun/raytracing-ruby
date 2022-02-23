@@ -1,7 +1,7 @@
 require './Triplet.rb'
 
 class Point3D < Triplet
-    def initialize(init_value = 0.0)
+    def initialize(x = 0, y = nil, z = nil)
         super
     end
 end
