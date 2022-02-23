@@ -52,7 +52,7 @@ class Triplet
         }
     }
 
-    def /(other)
+    def /(operand)
         self.class.new(
             @x.send(sym, operand),
             @y.send(sym, operand),
@@ -60,7 +60,7 @@ class Triplet
         )
     end
 
-    def *(other)
+    def *(operand)
         if [:x, :y, :z].all?{|attribute| operand.respond_to?(attribute) } then
             self.class.new(
                 @x.send(sym, operand.x),
