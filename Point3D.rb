@@ -5,3 +5,7 @@ class Point3D < Triplet
         super
     end
 end
+
+def p3d(x = 0.0, y = 0.0, z = 0.0)
+    Point3D.new(x, y, z)
+end

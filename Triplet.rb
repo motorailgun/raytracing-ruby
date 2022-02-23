@@ -79,3 +79,7 @@ class Triplet
         join(" ")
     end
 end
+
+def trpl(x = 0, y = 0, z = 0)
+    Triplet.new(x, y, z)
+end
