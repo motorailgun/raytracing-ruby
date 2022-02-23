@@ -2,6 +2,10 @@ class Triplet
     attr_accessor :x, :y, :z
 
     # methods required for calcuration
+    def coerce(numeric)
+        [self, numeric]
+    end
+
     def -@
         self.class.new(-@x, -@y, -@z)
     end
@@ -38,23 +42,39 @@ class Triplet
         @z /= num.to_f
     end
 
-    [:+, :-, '*', '/'].each{|sym|
+    [:+, :-].each{|sym|
         define_method(sym){|operand|
-            if [:x, :y, :z].all?{|attribute| operand.respond_to?(attribute) } then
-                self.class.new(
-                    @x.send(sym, operand.x),
-                    @y.send(sym, operand.y),
-                    @z.send(sym, operand.z) 
-                )
-            else
-                self.class.new(
-                    @x.send(sym, operand),
-                    @y.send(sym, operand),
-                    @z.send(sym, operand) 
-                )
-            end
+            self.class.new(
+                @x.send(sym, operand.x),
+                @y.send(sym, operand.y),
+                @z.send(sym, operand.z) 
+            )
         }
     }
+
+    def /(other)
+        self.class.new(
+            @x.send(sym, operand),
+            @y.send(sym, operand),
+            @z.send(sym, operand) 
+        )
+    end
+
+    def *(other)
+        if [:x, :y, :z].all?{|attribute| operand.respond_to?(attribute) } then
+            self.class.new(
+                @x.send(sym, operand.x),
+                @y.send(sym, operand.y),
+                @z.send(sym, operand.z) 
+            )
+        else
+            self.class.new(
+                @x.send(sym, operand),
+                @y.send(sym, operand),
+                @z.send(sym, operand) 
+            )
+        end
+    end
 
     def self.dot(u, v)
         u.x * v.x + u.y * v.y + u.z * u.z
