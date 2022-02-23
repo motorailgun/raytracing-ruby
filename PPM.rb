@@ -10,7 +10,7 @@ class PPM
     def to_s
         "P3\n#{@width} #{@height}\n#{@level}".concat(
             @canvas.reduce(""){|str, array|
-                str + array.reduce("\n"){|str, rgb| str + " " + rgb.join(" ") }
+                str + array.reduce("\n"){|str, rgb| str + " " + rgb.to_s }
             }
         )
     end
