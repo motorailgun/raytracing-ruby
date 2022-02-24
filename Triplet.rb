@@ -54,9 +54,9 @@ class Triplet
 
     def /(operand)
         self.class.new(
-            @x.send(:/, operand),
-            @y.send(:/, operand),
-            @z.send(:/, operand) 
+            @x.send(:/, operand.to_f),
+            @y.send(:/, operand.to_f),
+            @z.send(:/, operand.to_f) 
         )
     end
 
