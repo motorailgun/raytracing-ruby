@@ -8,7 +8,7 @@ class RGB < Triplet
 
     def initialize(x = 0.0, y = nil, z = nil, color_level = 256)
         @color_level = color_level
-        super
+        super(x, y, z)
     end
 
     undef_method(:join)
