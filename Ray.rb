@@ -10,7 +10,7 @@ class Ray
     end
 
     def at(t)
-        @origin + direction * t
+        @origin + @direction * t
     end
 end
 
