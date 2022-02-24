@@ -4,10 +4,6 @@ class Vector3D < Triplet
     def initialize(x = 0.0, y = nil, z = nil)
         super
     end
-
-    def unit_vector
-        self / self.length
-    end
 end
 
 def v3d(x = 0.0, y = nil, z = nil)

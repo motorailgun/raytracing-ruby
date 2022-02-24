@@ -96,6 +96,10 @@ class Triplet
                        @x * v.y - @y * v.x)
     end
 
+    def unit_vector
+        self / self.length
+    end
+
     # normal (and utilities) methods below
     def initialize(x = 0, y = nil, z = nil)
         @x, @y, @z = x, (y || x), (z || x)
