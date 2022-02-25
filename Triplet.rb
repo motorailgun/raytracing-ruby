@@ -130,7 +130,7 @@ class Triplet
     end
 
     def to_trpl
-        Triplet.new(self)
+        self.clone
     end
 end
 
