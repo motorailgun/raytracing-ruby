@@ -16,12 +16,13 @@ class Sphere < Hittable
         b = center_to_origin.dot(ray.direction)
         c = center_to_origin**2 - @radius ** 2
         discriminat = b**2 - a * c
+        t = 0
     
         if discriminat < 0 then
             false
         else
             sqrt_d = Math.sqrt(discriminat)
-            
+
             t = (-b - sqrt_d) / a
             if t < t_min || t_max < t then
                 t = (-b + sqrt_d) / a
@@ -30,7 +31,7 @@ class Sphere < Hittable
         end
 
         hit_point = ray.at(t)
-        outward_normal = (point - center) / radius
+        outward_normal = (hit_point - center) / radius
         face_normal = face_normal(ray, outward_normal) # face_normal is the same as outward_normal if the ray comes from outside of the sphere
         is_front_face = (face_normal == outward_normal) # is_front_face is true if ^^
         # outward_normal always points outside of the sphere.
