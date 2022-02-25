@@ -15,6 +15,12 @@ class RGB < Triplet
     def to_s
         [@x, @y, @z].map{ ((@color_level - 0.001) * _1).to_i }.reduce{|result, pt| result.to_s + ' ' + pt.to_s }
     end
+
+    def to_trpl
+        Triplet.new((@color_level - 0.001) * @x,
+                    (@color_level - 0.001) * @y,
+                    (@color_level - 0.001) * @z)
+    end
 end
 
 def rgb(r = 0.0, g = nil, b = nil)
