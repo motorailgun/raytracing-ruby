@@ -8,16 +8,6 @@ class RGB < Triplet
 
     def initialize(x = 0.0, y = nil, z = nil, color_level = 256)
         @color_level = color_level
-        
-        if x.kind_of?(Triplet) then
-            x = x.unit_vector
-            super(x)
-            return self
-        end
-
-        x = [x.abs, 1.0].min
-        y = [y.abs, 1.0].min if y
-        z = [z.abs, 1.0].min if z
         super(x, y, z)
     end
 
