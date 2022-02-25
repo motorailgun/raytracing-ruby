@@ -1,7 +1,7 @@
 require './rtweekend'
 
 def ray_color(ray, world)
-    if hit_record = world.hit(ray, 0, Infinity) then
+    if hit_record = world.hit(ray, 0.0, Infinity) then
         return  0.5 * (rgb(hit_record.normal) + rgb(1.0, 1.0, 1.0));
     end
     unit_direction = ray.direction.unit_vector
