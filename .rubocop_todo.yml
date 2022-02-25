@@ -1,0 +1,99 @@
+require:
+  - rubocop-rails
+
+Bundler:
+  Enabled: true
+
+Bundler/OrderedGems:
+  Enabled: false
+
+Gemspec:
+  Enabled: true
+
+Gemspec/OrderedDependencies:
+  Enabled: false
+
+Gemspec/RequiredRubyVersion:
+  Enabled: false
+
+Layout:
+  Enabled: false
+
+Lint:
+  Enabled: false
+
+Lint/AmbiguousAssignment:
+  Enabled: true
+Lint/BooleanSymbol:
+  Enabled: true
+Lint/CircularArgumentReference:
+  Enabled: true
+Lint/DuplicateCaseCondition:
+  Enabled: true
+Lint/DuplicateElsifCondition:
+  Enabled: true
+Lint/DuplicateHashKey:
+  Enabled: true
+Lint/DuplicateMethods:
+  Enabled: true
+Lint/DuplicateRegexpCharacterClassElement:
+  Enabled: true
+Lint/DuplicateRequire:
+  Enabled: true
+Lint/DuplicateRescueException:
+  Enabled: true
+Lint/EmptyExpression:
+  Enabled: true
+Lint/EmptyInterpolation:
+  Enabled: true
+Lint/FormatParameterMismatch:
+  Enabled: true
+Lint/FloatOutOfRange:
+  Enabled: true
+Lint/SafeNavigationChain:
+  Enabled: true
+Lint/IneffectiveAccessModifier:
+  Enabled: true
+Lint/MissingCopEnableDirective:
+  Enabled: true
+Lint/NestedMethodDefinition:
+  Enabled: true
+Lint/NumberedParameterAssignment:
+  Enabled: true
+Lint/OrAssignmentToConstant:
+  Enabled: true
+Lint/PercentSymbolArray:
+  Enabled: true
+Lint/StructNewOverride:
+  Enabled: true
+Lint/TripleQuotes:
+  Enabled: true
+Lint/UselessElseWithoutRescue:
+  Enabled: true
+Lint/UselessMethodDefinition:
+  Enabled: true
+Lint/UselessSetterCall:
+  Enabled: true
+Lint/Void:
+  Enabled: true
+
+Metrics:
+  Enabled: false
+
+Migration:
+  Enabled: true
+
+Naming:
+  Enabled: false
+
+Security:
+  Enabled: true
+
+Style:
+  Enabled: false
+
+Rails:
+  Enabled: false
+
+Rails/BulkChangeTable:
+  Enabled: true
