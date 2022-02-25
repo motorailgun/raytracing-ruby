@@ -1,4 +1,5 @@
 require './Hittable.rb'
+require './HitRecord.rb'
 
 class Sphere < Hittable
     attr_accessor :center, :radius
@@ -36,7 +37,7 @@ class Sphere < Hittable
         # similarly, if the ray is outside the sphere, dot if ray.direction and outward_normal is < 0.
         # (if on the surface of sphere, it depends on where the ray points)
 
-        return true, t, hit_point, face_normal, is_front_face
+        return HitRecord.new(hit_point, face_normal, t, is_front_face)
     end
 
     private
