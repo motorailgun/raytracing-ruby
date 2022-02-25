@@ -5,16 +5,16 @@ require './RGB.rb'
 require './Ray.rb'
 
 def hit_sphere(center, radius, ray)
-    origin_to_center = ray.origin - center
-    a = ray.direction.dot(ray.direction)
-    b = 2.0 * origin_to_center.dot(ray.direction)
-    c = origin_to_center.dot(origin_to_center) - radius ** 2
-    determinant = b**2 - 4 * a * c
+    center_to_origin = ray.origin - center
+    a = ray.direction ** 2
+    b = center_to_origin.dot(ray.direction)
+    c = center_to_origin**2 - radius ** 2
+    determinant = b**2 - a * c
 
     if determinant < 0 then
         false
     else
-        (-b - Math.sqrt(determinant)) / (a * 2)
+        (-b - Math.sqrt(determinant)) / a
     end
 end
 
