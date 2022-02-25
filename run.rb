@@ -4,20 +4,6 @@ require './Point3D.rb'
 require './RGB.rb'
 require './Ray.rb'
 
-def hit_sphere(center, radius, ray)
-    center_to_origin = ray.origin - center
-    a = ray.direction ** 2
-    b = center_to_origin.dot(ray.direction)
-    c = center_to_origin**2 - radius ** 2
-    determinant = b**2 - a * c
-
-    if determinant < 0 then
-        false
-    else
-        (-b - Math.sqrt(determinant)) / a
-    end
-end
-
 def ray_color(ray)
     if t = hit_sphere(p3d(0.0, 0.0, -1.0), 0.5, ray) then
         vec = (ray.at(t) - p3d(0.0, 0.0, -1.0)).unit_vector
