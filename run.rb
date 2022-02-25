@@ -5,16 +5,23 @@ require './RGB.rb'
 require './Ray.rb'
 
 def hit_sphere(center, radius, ray)
-    origin_to_center = center - ray.origin
+    origin_to_center = ray.origin - center
     a = ray.direction.dot(ray.direction)
     b = 2.0 * origin_to_center.dot(ray.direction)
     c = origin_to_center.dot(origin_to_center) - radius ** 2
-    (b**2 - 4 * a * c) > 0
+    determinant = b**2 - 4 * a * c
+
+    if determinant < 0 then
+        false
+    else
+        (-b - Math.sqrt(determinant)) / (a * 2)
+    end
 end
 
 def ray_color(ray)
-    if hit_sphere(p3d(0.0, 0.0, -1.0), 0.5, ray) then
-        return rgb(1.0, 0.0, 0.0)
+    if t = hit_sphere(p3d(0.0, 0.0, -1.0), 0.5, ray) then
+        vec = (ray.at(t) - p3d(0.0, 0.0, -1.0)).unit_vector
+        return rgb(vec.x + 1, vec.y + 1, vec.z + 1) * 0.5
     end
     unit_direction = ray.direction.unit_vector
     seppen = 0.5 * (unit_direction.y + 1.0)
