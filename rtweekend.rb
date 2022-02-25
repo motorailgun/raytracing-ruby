@@ -5,3 +5,5 @@ require './hittables/Sphere'
 require './PPM'
 require './Ray'
 require './RGB'
+
+Infinity = Float::INFINITY
