@@ -12,7 +12,7 @@ class HittableList
         @objects.push(obj)
     end
 
-    def hit?(ray, t_min, t_max)
+    def hit(ray, t_min, t_max)
         hit_record = false
         closest_so_far = false
 

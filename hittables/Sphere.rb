@@ -10,7 +10,7 @@ class Sphere < Hittable
         @radius = Float(radius)
     end
 
-    def hit?(ray, t_max, t_min)
+    def hit(ray, t_max, t_min)
         center_to_origin = ray.origin - @center
         a = ray.direction ** 2
         b = center_to_origin.dot(ray.direction)
