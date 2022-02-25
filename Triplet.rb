@@ -105,6 +105,7 @@ class Triplet
     # normal (and utilities) methods below
     def initialize(x = 0, y = nil, z = nil)
         if x.kind_of?(Triplet) then
+            x = x.to_trpl
             @x, @y, @z = [:x, :y, :z].map{ x.send(_1) }
             return self
         end
@@ -126,6 +127,10 @@ class Triplet
 
     def to_s
         join(" ")
+    end
+
+    def to_trpl
+        self
     end
 end
 
