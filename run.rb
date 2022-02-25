@@ -1,13 +1,8 @@
-require './PPM.rb'
-require './Vector3D.rb'
-require './Point3D.rb'
-require './RGB.rb'
-require './Ray.rb'
+require './rtweekend'
 
-def ray_color(ray)
-    if t = hit_sphere(p3d(0.0, 0.0, -1.0), 0.5, ray) then
-        vec = (ray.at(t) - p3d(0.0, 0.0, -1.0)).unit_vector
-        return rgb(vec.x + 1, vec.y + 1, vec.z + 1) * 0.5
+def ray_color(ray, world)
+    if hit_record = world.hit(ray, 0, Infinity) then
+        return  0.5 * (hit_record.normal + rgb(1.0, 1.0, 1.0));
     end
     unit_direction = ray.direction.unit_vector
     seppen = 0.5 * (unit_direction.y + 1.0)
@@ -18,6 +13,11 @@ end
 aspect_ratio = 16.0 / 9.0
 image_width = 400
 image_height = Integer(image_width / aspect_ratio)
+
+# world
+world = HittableList.new
+world.add(Sphere.new(p3d(0.0, 0.0, -1.0), 0.5))
+world.add(Sphere.new(p3d(0.0, -100.5, -1.0), 100.0))
 
 # camera properties
 viewport_height = 2.0
@@ -35,8 +35,8 @@ image_height.times{|h|
     image_width.times{|w|
         x = w.to_f / (image_width - 1)
         y = (image_height - h).to_f / (image_height - 1)
-        r = Ray.new(origin, lower_left_corner + x * horizontal + y * vertical - origin)
-        color = ray_color(r)
+        ray = Ray.new(origin, lower_left_corner + x * horizontal + y * vertical - origin)
+        color = ray_color(ray, world)
 
         canvas[h][w] = color
     }
