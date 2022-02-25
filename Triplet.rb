@@ -52,13 +52,15 @@ class Triplet
         }
     }
 
-    def /(operand)
-        self.class.new(
-            @x.send(:/, operand.to_f),
-            @y.send(:/, operand.to_f),
-            @z.send(:/, operand.to_f) 
-        )
-    end
+    [:/, :%].each{|sym|
+        define_method(sym){|operand|
+            self.class.new(
+                @x.send(sym, operand.to_f),
+                @y.send(sym, operand.to_f),
+                @z.send(sym, operand.to_f) 
+            )
+        }
+    }
 
     def *(operand)
         if [:x, :y, :z].all?{|attribute| operand.respond_to?(attribute) } then
