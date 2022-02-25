@@ -16,11 +16,12 @@ class Sphere < Hittable
         b = center_to_origin.dot(ray.direction)
         c = center_to_origin**2 - @radius ** 2
         discriminat = b**2 - a * c
-        sqrt_d = Math.sqrt(discriminat)
     
         if discriminat < 0 then
             false
         else
+            sqrt_d = Math.sqrt(discriminat)
+            
             t = (-b - sqrt_d) / a
             if t < t_min || t_max < t then
                 t = (-b + sqrt_d) / a
