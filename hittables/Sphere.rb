@@ -1,5 +1,5 @@
-require './Hittable.rb'
-require './HitRecord.rb'
+require_relative './Hittable.rb'
+require_relative './HitRecord.rb'
 
 class Sphere < Hittable
     attr_accessor :center, :radius

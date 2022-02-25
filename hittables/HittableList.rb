@@ -1,4 +1,4 @@
-require './HitRecord.rb'
+require_relative './HitRecord.rb'
 
 class HittableList
     attr_accessor :objects
