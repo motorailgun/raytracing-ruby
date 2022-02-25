@@ -14,7 +14,7 @@ class HittableList
 
     def hit(ray, t_min, t_max)
         hit_record = false
-        closest_so_far = false
+        closest_so_far = Float::INFINITY
 
         @objects.each{|obj|
             if hit_record = obj.hit(ray, t_min, closest_so_far) then
