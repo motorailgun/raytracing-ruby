@@ -17,8 +17,9 @@ class HittableList
         closest_so_far = t_max
 
         @objects.each{|obj|
-            if hit_record = obj.hit(ray, t_min, closest_so_far) then
-                closest_so_far = hit_record.t
+            if hitted = obj.hit(ray, t_min, closest_so_far) then
+                closest_so_far = hitted.t
+                hit_record = hitted
             end
         }
 
