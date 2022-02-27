@@ -6,7 +6,7 @@ class Camera
 
     def initalize(width: nil, height: nil, aspect_ratio: 16.0 / 9.0,
                   focal_length: 1.0,
-                  origin: p3d(0.0, 0.0, 0.0),
+                  origin: p3d(0.0, 0.0, 0.0)
                 )
         
         raise ArgumentError.new("Origin must be kind of Point3D") unless origin.kind_of?(Point3D)
