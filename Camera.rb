@@ -1,4 +1,4 @@
-require_relative './rtweekend'
+require_relative './Point3D'
 
 class Camera
     attr_reader :viewport_height, :viewport_width, :focal_length, :origin
