@@ -132,11 +132,11 @@ class Triplet
     def to_trpl
         self.clone
     end
-
+    
     def self.rand(lower_limit = 0.0, upper_limit = 1.0)
         lower_limit, upper_limit = Float(lower_limit), Float(upper_limit)
         range = lower_limit..upper_limit
-        self.class.new(rand(range), rand(range), rand(range))
+        self.new(Kernel.rand(range), Kernel.rand(range), Kernel.rand(range))
     end
 end
 
