@@ -31,7 +31,7 @@ def ray_color(ray, world, depth)
 end
 
 def clamp_color(color, samples)
-    color * (1.0 / samples)
+    (color * (1.0 / samples)).sqrt
     # ^^ must be faster than deviding three(r, g, b) ?
     # this calculation is done for every pixel, so faster must be better
 end
