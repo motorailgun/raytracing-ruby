@@ -17,12 +17,14 @@ def randvec_in_unit_sphere
     }
 end
 
-def ray_color(ray, world)
+def ray_color(ray, world, depth)
+    return rgb() if depth <= 0
+
     if hit_record = world.hit(ray, 0.0, Infinity) then
         reflected_to = hit_record.hit_point + hit_record.normal + randvec_in_unit_sphere
-        return  0.5 * ray_color(ray(hit_record.hit_point, reflected_to - hit_record.hit_point))
+        return  0.5 * ray_color(ray(hit_record.hit_point, reflected_to - hit_record.hit_point), world, depth - 1)
     end
-    
+
     unit_direction = ray.direction.unit_vector
     seppen = 0.5 * (unit_direction.y + 1.0)
     (1.0 - seppen) * rgb(1.0, 1.0, 1.0) + seppen * rgb(0.5, 0.7, 1.0)
