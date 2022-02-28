@@ -19,8 +19,10 @@ end
 
 def ray_color(ray, world)
     if hit_record = world.hit(ray, 0.0, Infinity) then
-        return  0.5 * (rgb(hit_record.normal) + rgb(1.0, 1.0, 1.0));
+        reflected_to = hit_record.hit_point + hit_record.normal + randvec_in_unit_sphere
+        return  0.5 * ray_color(ray(hit_record.hit_point, reflected_to - hit_record.hit_point))
     end
+    
     unit_direction = ray.direction.unit_vector
     seppen = 0.5 * (unit_direction.y + 1.0)
     (1.0 - seppen) * rgb(1.0, 1.0, 1.0) + seppen * rgb(0.5, 0.7, 1.0)
