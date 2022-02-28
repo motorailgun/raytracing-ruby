@@ -14,6 +14,7 @@ world.add(Sphere.new(p3d(0.0, -100.5, -1.0), 100.0))
 camera = Camera.new(:height => 2.0, :focal_length => 1.0)
 samples = 100
 
+max_depth = 25
 canvas = PPM.new(image_width, image_height)
 
 image_height.times{|h|
@@ -26,7 +27,7 @@ image_height.times{|h|
             x = (w.to_f + rand) / (image_width - 1)
             y = (image_height - h + rand).to_f / (image_height - 1)
             ray = camera.get_ray(x, y)
-            color += ray_color(ray, world)
+            color += ray_color(ray, world, max_depth)
         }
         canvas[h][w] = clamp_color(color, samples)
     }
