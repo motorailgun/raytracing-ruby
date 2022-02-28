@@ -12,6 +12,12 @@ class Vector3D < Triplet
             false
         end
     end
+
+    def Vector3D.rand_vec(lower_limit = 0.0, upper_limit = 1.0)
+        lower_limit, upper_limit = Float(lower_limit), Float(upper_limit)
+        range = lower_limit..upper_limit
+        Vector3D.new(rand(range), rand(range), rand(range))
+    end
 end
 
 def v3d(x = 0.0, y = nil, z = nil)
