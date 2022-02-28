@@ -32,7 +32,7 @@ samples = 100
 canvas = PPM.new(image_width, image_height)
 
 image_height.times{|h|
-    $stderr.puts "line #{h} out of #{image_height}: processing..."
+    $stderr.puts "line #{h + 1} out of #{image_height}: processing..."
     $stderr.flush
 
     image_width.times{|w|
