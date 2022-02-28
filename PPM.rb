@@ -15,4 +15,8 @@ class PPM
             }
         )
     end
+
+    def [](idx)
+        @canvas[idx]
+    end
 end
