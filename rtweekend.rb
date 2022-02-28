@@ -20,7 +20,7 @@ end
 def ray_color(ray, world, depth)
     return rgb(0.0, 0.0, 0.0) if depth <= 0
 
-    if hit_record = world.hit(ray, 0.0, Infinity) then
+    if hit_record = world.hit(ray, 0.001, Infinity) then
         reflected_to = hit_record.hit_point + hit_record.normal + randvec_in_unit_sphere
         return  0.5 * ray_color(ray(hit_record.hit_point, reflected_to - hit_record.hit_point), world, depth - 1)
     end
