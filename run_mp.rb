@@ -30,12 +30,13 @@ world.add(Sphere.new(p3d(0.0, -100.5, -1.0), 100.0))
 camera = Camera.new(:height => 2.0, :focal_length => 1.0)
 samples = 50
 
-canvas = PPM.new(image_width, image_height)
-
 pids = []
+readers = []
 
 image_height.times{|h|
     reader, writer = IO.pipe
+    readers.push(reader)
+
     pids.push(fork do
         res = []
         $stderr.puts "line #{h + 1} out of #{image_height}: processing..."
@@ -53,18 +54,20 @@ image_height.times{|h|
             res.push(clamp_color(color, samples))
         }
 
-        Marshal.dump(res, writer)
+        writer.puts(res.map{_1.to_s}.join(" "))
         $stderr.puts "line #{h + 1} out of #{image_height}: Done"
         $stderr.flush
         writer.close
     end)
-    canvas.canvas[h] = reader
 }
 
 pids.each{Process.waitpid(_1)}
-canvas.canvas = canvas.canvas.map{
-    res = Marshal.load(_1)
+
+puts "P3"
+puts "#{image_width} #{image_height}"
+puts "#{256}"
+
+readers.each{
+    puts _1.gets
     _1.close
-    res
 }
-puts canvas
