@@ -18,7 +18,7 @@ def randvec_in_unit_sphere
 end
 
 def ray_color(ray, world, depth)
-    return rgb() if depth <= 0
+    return rgb(0.0, 0.0, 0.0) if depth <= 0
 
     if hit_record = world.hit(ray, 0.0, Infinity) then
         reflected_to = hit_record.hit_point + hit_record.normal + randvec_in_unit_sphere
