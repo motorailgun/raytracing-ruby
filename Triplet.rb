@@ -98,6 +98,10 @@ class Triplet
                        @x * v.y - @y * v.x)
     end
 
+    def sqrt
+        self.class.new(Math.sqrt(@x), Math.sqrt(@y), Math.sqrt(@z))
+    end
+
     def unit_vector
         self / self.length
     end
