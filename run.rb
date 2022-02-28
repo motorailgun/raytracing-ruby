@@ -9,6 +9,12 @@ def ray_color(ray, world)
     (1.0 - seppen) * rgb(1.0, 1.0, 1.0) + seppen * rgb(0.5, 0.7, 1.0)
 end
 
+def clamp_color(color, samples)
+    color * (1.0 / samples)
+    # ^^ must be faster than deviding three(r, g, b) ?
+    # this calculation is done for every pixel, so faster must be better
+end
+
 # image properties
 aspect_ratio = 16.0 / 9.0
 image_width = 400
@@ -20,25 +26,24 @@ world.add(Sphere.new(p3d(0.0, 0.0, -1.0), 0.5))
 world.add(Sphere.new(p3d(0.0, -100.5, -1.0), 100.0))
 
 # camera properties
-viewport_height = 2.0
-viewport_width = Float(viewport_height * aspect_ratio)
-focal_length = 1.0
-
-origin = Point3D.new(0.0, 0.0, 0.0)
-horizontal = Vector3D.new(viewport_width, 0.0, 0.0)
-vertical = Vector3D.new(0.0, viewport_height, 0.0)
-lower_left_corner = origin - horizontal/2.0 - vertical/2.0 - v3d(0.0, 0.0, focal_length)
+camera = Camera.new(:height => 2.0, :focal_length => 1.0)
+samples = 100
 
 canvas = PPM.new(image_width, image_height)
 
 image_height.times{|h|
-    image_width.times{|w|
-        x = w.to_f / (image_width - 1)
-        y = (image_height - h).to_f / (image_height - 1)
-        ray = Ray.new(origin, lower_left_corner + x * horizontal + y * vertical - origin)
-        color = ray_color(ray, world)
+    $stderr.puts "line #{h} out of #{image_height}: processing..."
+    $stderr.flush
 
-        canvas[h][w] = color
+    image_width.times{|w|
+        color = rgb()
+        samples.times{
+            x = (w.to_f + rand) / (image_width - 1)
+            y = (image_height - h + rand).to_f / (image_height - 1)
+            ray = camera.get_ray(x, y)
+            color += ray_color(ray, world)
+        }
+        canvas[h][w] = clamp_color(color, samples)
     }
 }
 
