@@ -10,8 +10,8 @@ world = HittableList.new
 
 material_ground = Lambertian.new(rgb(0.8, 0.8, 0.0))
 material_center = Lambertian.new(rgb(0.7, 0.3, 0.3))
-material_left = Metal.new(rgb(0.8, 0.8, 0.8))
-material_right = Metal.new(rgb(0.8, 0.6, 0.2))
+material_left = Metal.new(rgb(0.8, 0.8, 0.8), 0.3)
+material_right = Metal.new(rgb(0.8, 0.6, 0.2), 1.0)
 
 world.add(Sphere.new(p3d(0.0, -100.5, -1.0), 100.0, material_ground))
 world.add(Sphere.new(p3d(0.0, 0.0, -1.0), 0.5, material_center))
