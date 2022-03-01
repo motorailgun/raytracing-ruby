@@ -2,6 +2,10 @@ require './hittables/HitRecord'
 require './hittables/HittableList'
 require './hittables/Sphere'
 
+require './materials/Material'
+require './materials/Lambertian'
+require './materials/Metal'
+
 require './PPM'
 require './Ray'
 require './RGB'
