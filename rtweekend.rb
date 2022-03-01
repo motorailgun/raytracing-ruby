@@ -31,8 +31,10 @@ def ray_color(ray, world, depth)
     if hit_record = world.hit(ray, 0.001, Infinity) then
         reflected_ray = hit_record.material.reflect(ray, hit_record)
         attenuation = hit_record.material.attenuation
-
-        return  attenuation * ray_color(reflected_ray, world, depth - 1)
+        if reflected_ray then
+            return  attenuation * ray_color(reflected_ray, world, depth - 1)
+        end
+        return rgb(0.0, 0.0, 0.0)
     end
 
     unit_direction = ray.direction.unit_vector
