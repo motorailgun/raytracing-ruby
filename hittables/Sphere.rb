@@ -2,12 +2,14 @@ require_relative './Hittable.rb'
 require_relative './HitRecord.rb'
 
 class Sphere < Hittable
-    attr_accessor :center, :radius
+    attr_accessor :center, :radius, :material
 
-    def initialize(center, radius)
+    def initialize(center, radius, material)
         raise ArgumentError.new("Sphere's center must be point") unless center.kind_of?(Point3D)
+        raise ArgumentError.new("material must be kind of Material") unless material.kind_of?(Material)
         @center = center
         @radius = Float(radius)
+        @material = material
     end
 
     def hit(ray, t_min, t_max)
@@ -39,7 +41,7 @@ class Sphere < Hittable
         # similarly, if the ray is outside the sphere, dot if ray.direction and outward_normal is < 0.
         # (if on the surface of sphere, it depends on where the ray points)
 
-        return HitRecord.new(hit_point, face_normal, t, is_front_face)
+        return HitRecord.new(hit_point, face_normal, t, is_front_face, material)
     end
 
     private
