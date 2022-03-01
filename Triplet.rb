@@ -106,6 +106,11 @@ class Triplet
         self / self.length
     end
 
+    def near_zero?
+        almost_zero = 1e-8
+        [@x, @y, @z].all?{ _1 < almost_zero }
+    end
+
     # normal (and utilities) methods below
     def initialize(x = 0, y = nil, z = nil)
         if x.kind_of?(Triplet) then
