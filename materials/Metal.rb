@@ -13,6 +13,6 @@ class Metal < Material
 
     private
     def metal_reflect(vector, normal)
-        vector - (vector.dot(normal) * normal)
+        vector - 2 * (vector.dot(normal) * normal)
     end
 end
