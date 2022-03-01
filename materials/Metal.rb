@@ -1,6 +1,6 @@
 require_relative '../rtweekend'
 
-class Lambertian < Material
+class Metal < Material
     def initialize(attenuation = rgb(0.99))
         @attenuation = attenuation
     end
