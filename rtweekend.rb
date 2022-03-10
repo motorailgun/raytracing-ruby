@@ -5,6 +5,7 @@ require './hittables/Sphere'
 require './materials/Material'
 require './materials/Lambertian'
 require './materials/Metal'
+require './materials/Dielectric'
 
 require './PPM'
 require './Ray'
