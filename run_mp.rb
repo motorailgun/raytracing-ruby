@@ -7,20 +7,16 @@ image_height = Integer(image_width / aspect_ratio)
 
 # world
 world = HittableList.new
+radius = Math.cos(Math::PI / 4.0)
 
-material_ground = Lambertian.new(rgb(0.8, 0.8, 0.0))
-material_center = Lambertian.new(rgb(0.1, 0.2, 0.5))
-material_left = Dielectric.new(1.5)
-material_right = Metal.new(rgb(0.8, 0.6, 0.2), 0.0)
+material_left = Lambertian.new(rgb(0.0, 0.0, 1.0))
+material_right = Lambertian.new(rgb(1.0, 0.0, 0.0))
 
-world.add(Sphere.new(p3d(0.0, -100.5, -1.0), 100.0, material_ground))
-world.add(Sphere.new(p3d(0.0, 0.0, -1.0), 0.5, material_center))
-world.add(Sphere.new(p3d(-1.0, 0.0, -1.0), 0.5, material_left))
-world.add(Sphere.new(p3d(-1.0, 0.0, -1.0), -0.4, material_left))
-world.add(Sphere.new(p3d(1.0, 0.0, -1.0), 0.5, material_right))
+world.add(Sphere.new(p3d(-radius, 0.0, -1.0), radius, material_left))
+world.add(Sphere.new(p3d(radius, 0.0, -1.0), radius, material_right))
 
 # camera properties
-camera = Camera.new(:height => 2.0, :focal_length => 1.0)
+camera = Camera.new(:v_fov => 90, :aspect_ratio => aspect_ratio)
 samples = 50
 
 max_depth = 25
