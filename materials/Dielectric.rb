@@ -16,7 +16,7 @@ class Dielectric < Material
         cost = [(-unit_direction).dot(hit_record.normal), 1.0].min
         sint = Math.sqrt(1.0 - cost**2)
 
-        if refraction_ratio * sint > 1.0 then
+        if refraction_ratio * sint > 1.0 || reflectance(cost, refraction_ratio) > rand() then
             direction = total_reflect(unit_direction, hit_record.normal)
         else
             direction = refract(unit_direction, hit_record.normal, refraction_ratio)
@@ -37,4 +37,8 @@ class Dielectric < Material
         vector - 2 * (vector.dot(normal) * normal)
     end
 
+    def reflectance(cost, refraction_ratio)
+        r0 = ((1.0 - refraction_ratio) / (1 + refraction_ratio)) ** 2
+        r0 + (1.0 - r0) * (1.0 - cost) ** 5
+    end
 end
