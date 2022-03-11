@@ -119,7 +119,7 @@ class Triplet
             return self
         end
 
-        @x, @y, @z = x, (y || x), (z || x)
+        @x, @y, @z = x.to_f, (y || x).to_f, (z || x).to_f
     end
 
     def [](idx)
