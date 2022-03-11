@@ -3,23 +3,18 @@ require_relative './Point3D'
 class Camera
     attr_reader :viewport_height, :viewport_width, :focal_length, :origin
 
-    def initialize(width: nil, height: nil, aspect_ratio: 16.0 / 9.0,
+    def initialize(aspect_ratio: 16.0 / 9.0,
                   focal_length: 1.0,
-                  origin: p3d(0.0, 0.0, 0.0)
+                  origin: p3d(0.0, 0.0, 0.0),
+                  v_fov: 90
                 )
         
         raise ArgumentError.new("Origin must be kind of Point3D") unless origin.kind_of?(Point3D)
-        default_height = 2.0
-
-        if !(width && height) then
-            if width then
-                height = Float(width) / aspect_ratio
-            elsif height then
-                width = Float(height) * aspect_ratio
-            end
-        end
-
-        @viewport_width, @viewport_height = (width || default_height * aspect_ratio), (height || default_height)
+        
+        tant = Math.tan(Math::PI / 180.0 / 2)
+        @viewport_height = 2.0 * tant
+        @viewport_width = aspect_ratio * @viewport_height
+        
         @aspect_ratio, @focal_length = aspect_ratio, focal_length
         @origin = origin
 
