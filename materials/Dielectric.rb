@@ -13,9 +13,16 @@ class Dielectric < Material
         refraction_ratio = hit_record.front_face ? (1.0 / @index_of_refraction) : @index_of_refraction;
 
         unit_direction = ray.direction.unit_vector
-        refracted = refract(unit_direction, hit_record.normal, refraction_ratio)
+        cost = [(-unit_direction).dot(hit_record.normal), 1.0].min
+        sint = Math.sqrt(1.0 - cost**2)
+
+        if refraction_ratio * sint > 1.0 then
+            direction = total_reflect(unit_direction, hit_record.normal)
+        else
+            direction = refract(unit_direction, hit_record.normal, refraction_ratio)
+        end
         
-        ray(hit_record.hit_point, refracted)
+        ray(hit_record.hit_point, direction)
     end
 
     private
@@ -24,6 +31,10 @@ class Dielectric < Material
         r_out_perpendicular = relative_reflective_index * (input_vector + cost * normal)
         r_out_parallel = -Math.sqrt((1.0 - r_out_perpendicular ** 2).abs) * normal
         r_out_parallel + r_out_perpendicular
+    end
+
+    def total_reflect(vector, normal)
+        vector - 2 * (vector.dot(normal) * normal)
     end
 
 end
