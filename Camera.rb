@@ -11,7 +11,7 @@ class Camera
         
         raise ArgumentError.new("Origin must be kind of Point3D") unless origin.kind_of?(Point3D)
         
-        tant = Math.tan(Math::PI / 180.0 / 2)
+        tant = Math.tan(v_fov * Math::PI / 180.0 / 2)
         @viewport_height = 2.0 * tant
         @viewport_width = aspect_ratio * @viewport_height
         
