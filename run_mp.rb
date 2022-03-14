@@ -20,11 +20,13 @@ world.add(Sphere.new(p3d(-1.0,   0.0, -1.0), -0.45, material_left))
 world.add(Sphere.new(p3d(1.0,    0.0, -1.0),   0.5, material_right))
 
 # camera properties
-camera = Camera.new(:v_fov => 90, :aspect_ratio => aspect_ratio,
-                    :look_from => p3d(-2.0, 2.0, 1.0),
-                    :look_at => p3d(0.0, 0.0, -1.0),
-                    :vec_view_up => v3d(0.0, 1.0, 0.0)
-                )
+camera = Camera.new(:v_fov => 20, :aspect_ratio => aspect_ratio,
+    :look_from => p3d(3.0, 3.0, 2.0),
+    :look_at => p3d(0.0, 0.0, -1.0),
+    :vec_view_up => v3d(0.0, 1.0, 0.0),
+    :aperture => 2.0,
+    :focus_distance => (p3d(3.0, 3.0, 2.0) - p3d(0.0, 0.0, -1.0)).length
+)
 samples = 50
 
 max_depth = 25
