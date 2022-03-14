@@ -7,9 +7,11 @@ class Camera
                   focal_length: 1.0,
                   origin: p3d(0.0, 0.0, 0.0),
                   v_fov: 90,
+                  aperture: 2.0,
                   look_from: ,
                   look_at: ,
-                  vec_view_up: 
+                  vec_view_up: ,
+                  focus_distance:
                 )
         
         raise ArgumentError.new("Origin must be kind of Point3D") unless origin.kind_of?(Point3D)
@@ -21,18 +23,24 @@ class Camera
         @aspect_ratio, @focal_length = aspect_ratio, focal_length
         @origin = origin
 
-        w = (look_from - look_at).unit_vector
-        u = vec_view_up.cross(w).unit_vector
-        v = w.cross(u)
+        @w = w = (look_from - look_at).unit_vector
+        @u = u = vec_view_up.cross(w).unit_vector
+        @v = v = w.cross(u)
 
         @origin = look_from
-        @horizontal = @viewport_width * u
-        @vertical = @viewport_height * v
-        @lower_left_corner = @origin - @horizontal / 2 - @vertical / 2 - w
+        @horizontal = focus_distance * @viewport_width * u
+        @vertical = focus_distance * @viewport_height * v
+        @lower_left_corner = @origin - @horizontal / 2 - @vertical / 2 - focus_distance * w
+
+        @lens_radius = aperture / 2.0
     end
 
     def get_ray(u, v)
-        ray(@origin, @lower_left_corner + u * @horizontal + v * @vertical - @origin)
+        rd = @lens_radius * random_in_unit_disk
+        offset = @u * rd.x + @v * rd.y
+
+        ray(@origin + offset,
+            @lower_left_corner + u * @horizontal + v * @vertical - @origin - offset)
     end
 
     private
