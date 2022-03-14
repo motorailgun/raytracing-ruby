@@ -34,4 +34,14 @@ class Camera
     def get_ray(u, v)
         ray(@origin, @lower_left_corner + u * @horizontal + v * @vertical - @origin)
     end
+
+    private
+    def random_in_unit_disk
+        loop do
+            p = v3d(rand(-1.0..1.0), rand(-1.0..1.0), 0)
+            next if p ** 2 >= 1
+            return p
+        end
+    end
+
 end
