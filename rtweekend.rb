@@ -48,3 +48,38 @@ def clamp_color(color, samples)
     # ^^ must be faster than deviding three(r, g, b) ?
     # this calculation is done for every pixel, so faster must be better
 end
+
+def random_scene
+    world = HittableList.new
+
+    material_ground = Lambertian.new(rgb(0.5, 0.5, 0.5))
+    world.add(Sphere.new(p3d(0.0, -1000.0, 0), 1000.0, material_ground))
+
+    for x in -11..11 do
+        for z in -11..11 do
+            material_value = rand
+            sp_center = p3d(x + rand * 0.9, 0.2, z + rand * 0.9)
+
+            if (sp_center - p3d(4.0, 0.2, 0.0)).length > 0.9 then
+                if material_value < 0.8 then
+                    # diffuse
+                    color = RGB::rand(0.0, 1.0) * RGB::rand(0.0, 1.0)
+                    sp_material = Lambertian.new(color)
+                    world.add(Sphere.new(sp_center, 0.2, sp_material))
+                elsif material_value < 0.95 then
+                    # metal
+                    color = RGB::rand(0.5, 1.0)
+                    fuzz = rand(0.0..0.5)
+                    sp_material = Metal.new(color, fuzz)
+                    world.add(Sphere.new(sp_center, 0.2, sp_material))
+                else
+                    # glass
+                    sp_material = Dielectric.new(1.5)
+                    world.add(Sphere.new(sp_center, 0.2, sp_material))
+                end
+            end
+        end
+    end
+
+    world
+end
