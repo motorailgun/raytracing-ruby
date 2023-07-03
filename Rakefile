@@ -5,4 +5,4 @@ Minitest::TestTask.create(:test) do |t|
     t.libs << "lib"
     t.warning = false
     t.test_globs = ["**/*_test.rb"]
-  end
+end
