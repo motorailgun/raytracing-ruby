@@ -1,0 +1,21 @@
+name: rake test
+
+on: push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: setup ruby
+        uses: ruby/setup-ruby@250fcd6a742febb1123a77a841497ccaa8b9e939
+        with:
+          ruby-version: '3.1'
+
+      - name: setup dependencies
+        run: bundle install
+
+      - name: run tests
+        run: rake test
