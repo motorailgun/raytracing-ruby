@@ -80,6 +80,10 @@ def random_scene
             end
         end
     end
+    
+    world.add(Sphere.new(p3d(0.0, 1.0, 0.0), 0.6, Dielectric.new(1.5)))
+    world.add(Sphere.new(p3d(-4.0, 1.0, 0.0), 0.6, Lambertian.new(rgb(0.5, 0.2, 0.1))))
+    world.add(Sphere.new(p3d(4.0, 1.0, 0.0), 0.8, Metal.new(rgb(0.6, 0.6, 0.7), 0.0)))
 
     world
 end
